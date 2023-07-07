@@ -10,6 +10,8 @@
 
             <Label Text="The Weather for today is: " />
             <Label Text="{Binding Data.data[0].weather.description}"/>
+
+            <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://cdn.weatherbit.io/static/img/icons/{0}.png'}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
