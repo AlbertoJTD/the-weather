@@ -8,8 +8,8 @@
                        x:Name="searchControl"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchControl}}"
                        BackgroundColor="White"
-                       Placeholder="Search by coordinates..."
-                       Margin="15"/>
+                       Placeholder="Search by coordinates (lat,long)"
+                       Margin="15" />
 
             <Frame Margin="25"
                    BackgroundColor="#57B3D2"
@@ -44,16 +44,16 @@
                     </StackLayout>
 
                     <StackLayout Grid.Row="2">
-                        <Label Text="{Binding Data.data[0].wind_spd, StringFormat='Wind speed {0} m/s'}"
+                        <Label Text="{Binding Data.data[0].wind_spd, StringFormat='Wind speed: {0} m/s'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                        <Label Text="{Binding Data.data[0].rh, StringFormat='Relative humidity {0}%'}"
+                        <Label Text="{Binding Data.data[0].rh, StringFormat='Relative humidity: {0}%'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                        <Label Text="{Binding Data.data[0].vis, StringFormat='Visibility {0} KM'}"
+                        <Label Text="{Binding Data.data[0].vis, StringFormat='Visibility: {0} KM'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                        <Label Text="{Binding Data.data[0].uv, StringFormat='UV index {0}'}"
+                        <Label Text="{Binding Data.data[0].uv, StringFormat='UV index: {0}'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
                     </StackLayout>

@@ -36,12 +36,18 @@ namespace WeatherApp.ViewModels
 			}
 		}
 		public ICommand SearchCommand { get; set; }
+		public string MyKey = "my_key";
 
         public WeatherPageViewModel()
         {
             SearchCommand = new Command(async (searchTerm) =>
             {
-                await GetData("https://api.weatherbit.io/v2.0/");
+				var input = searchTerm as string;
+				var splitInput = input.Split(',');
+				var lat = splitInput[0];
+				var lon = splitInput[1];
+
+                await GetData($"https://api.weatherbit.io/v2.0/current?lat={lat}&lon={lon}&key={MyKey}");
             });
 		}
 
