@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,10 +12,30 @@ using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels
 {
-	public class WeatherPageViewModel
+	public class WeatherPageViewModel: INotifyPropertyChanged
 	{
-        public WeatherData Data { get; set; }
-        public ICommand SearchCommand { get; set; }
+		private WeatherData data;
+
+		#region PropertyChanged
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
+		}
+		#endregion
+
+
+		public WeatherData Data
+		{
+			get => data;
+			set
+			{
+				data = value;
+				OnPropertyChanged();
+			}
+		}
+		public ICommand SearchCommand { get; set; }
 
         public WeatherPageViewModel()
         {

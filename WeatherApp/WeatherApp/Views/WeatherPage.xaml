@@ -7,6 +7,9 @@
             <SearchBar SearchCommand="{Binding SearchCommand}"
                        x:Name="searchControl"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchControl}}" />
+
+            <Label Text="The Weather for today is: " />
+            <Label Text="{Binding Data.data[0].weather.description}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
