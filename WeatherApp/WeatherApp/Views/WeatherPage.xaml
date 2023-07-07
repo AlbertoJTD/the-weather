@@ -3,15 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.WeatherPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Background="#2980B9">
             <SearchBar SearchCommand="{Binding SearchCommand}"
                        x:Name="searchControl"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference searchControl}}" />
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchControl}}"
+                       BackgroundColor="White"
+                       Placeholder="Search by coordinates..."
+                       Margin="15"/>
 
-            <Label Text="The Weather for today is: " />
-            <Label Text="{Binding Data.data[0].weather.description}"/>
+            <Frame Margin="25"
+                   BackgroundColor="#57B3D2"
+                   VerticalOptions="FillAndExpand">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".2*" />
+                        <RowDefinition Height=".6*" />
+                        <RowDefinition Height=".2*" />
+                    </Grid.RowDefinitions>
 
-            <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://cdn.weatherbit.io/static/img/icons/{0}.png'}"/>
+                    <Label Text="{Binding Data.data[0].city_name}"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Large"
+                           Grid.Row="0"/>
+
+                    <StackLayout Grid.Row="1"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://cdn.weatherbit.io/static/img/icons/{0}.png'}"/>
+                            <Label Text="{Binding Data.data[0].weather.description}"
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <Label Text="{Binding Data.data[0].temp, StringFormat='{0}°'}"
+                               FontSize="Header"
+                               TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2">
+                        <Label Text="{Binding Data.data[0].wind_spd, StringFormat='Wind speed {0} m/s'}"
+                               TextColor="White"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding Data.data[0].rh, StringFormat='Relative humidity {0}%'}"
+                               TextColor="White"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding Data.data[0].vis, StringFormat='Visibility {0} KM'}"
+                               TextColor="White"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding Data.data[0].uv, StringFormat='UV index {0}'}"
+                               TextColor="White"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
