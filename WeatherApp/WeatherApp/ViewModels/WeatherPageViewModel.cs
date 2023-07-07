@@ -17,9 +17,9 @@ namespace WeatherApp.ViewModels
 
         public WeatherPageViewModel()
         {
-            SearchCommand = new Command(async () =>
+            SearchCommand = new Command(async (searchTerm) =>
             {
-                await GetData("");
+                await GetData("https://api.weatherbit.io/v2.0/");
             });
 		}
 
@@ -27,7 +27,7 @@ namespace WeatherApp.ViewModels
 		{
             var client = new HttpClient();
             var response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode(); // Throws and exception if there is an error
 
             var jsonResult = await response.Content.ReadAsStringAsync();
 
