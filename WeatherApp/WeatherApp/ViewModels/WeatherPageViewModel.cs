@@ -36,7 +36,7 @@ namespace WeatherApp.ViewModels
 			}
 		}
 		public ICommand SearchCommand { get; set; }
-		public string MyKey = "my_key";
+		public string MyKey = "b1ef88109f404e40b6c70a597bc9f992";
 
         public WeatherPageViewModel()
         {

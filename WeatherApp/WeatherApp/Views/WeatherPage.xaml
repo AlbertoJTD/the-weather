@@ -1,64 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
              x:Class="WeatherApp.WeatherPage">
     <ContentPage.Content>
-        <StackLayout Background="#2980B9">
-            <SearchBar SearchCommand="{Binding SearchCommand}"
+        <Grid>
+            <magicGradients:GradientView VerticalOptions="FillAndExpand">
+                <!--<magicGradients:GradientView.GradientSource>
+                    <magicGradients:LinearGradient Angle="180">
+                        <magicGradients:GradientStop Color="#162655" Offset="0" />
+                        <magicGradients:GradientStop Color="#92609E" Offset="1" />
+                    </magicGradients:LinearGradient>
+                </magicGradients:GradientView.GradientSource>-->
+                <magicGradients:CssGradientSource>
+                    <!-- linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%) -->
+                    <![CDATA[
+                        radial-gradient(circle at 67% 83%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 1%,
+                        transparent 1%, transparent 5%,transparent 5%, transparent 100%),
+                        radial-gradient(circle at 24% 80%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 27%,
+                        transparent 27%, transparent 63%,transparent 63%, transparent 100%),
+                        radial-gradient(circle at 23% 5%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 26%,
+                        transparent 26%, transparent 82%,transparent 82%, transparent 100%),
+                        radial-gradient(circle at 21% 11%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 35%,
+                        transparent 35%, transparent 45%,transparent 45%, transparent 100%),
+                        radial-gradient(circle at 10% 11%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 21%,
+                        transparent 21%, transparent 81%,transparent 81%, transparent 100%),
+                        radial-gradient(circle at 19% 61%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 20%,
+                        transparent 20%, transparent 61%,transparent 61%, transparent 100%),
+                        radial-gradient(circle at 13% 77%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 63%,
+                        transparent 63%, transparent 72%,transparent 72%, transparent 100%),
+                        radial-gradient(circle at 30% 93%, hsla(317,0%,96%,0.05) 0%, hsla(317,0%,96%,0.05) 33%,
+                        transparent 33%, transparent 82%,transparent 82%, transparent 100%),
+                        linear-gradient(90deg, rgb(22, 176, 207),rgb(103, 7, 215))
+                    ]]>
+                </magicGradients:CssGradientSource>
+            </magicGradients:GradientView>
+
+            <StackLayout>
+                <SearchBar SearchCommand="{Binding SearchCommand}"
                        x:Name="searchControl"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchControl}}"
                        BackgroundColor="White"
                        Placeholder="Search by coordinates (lat,long)"
                        Margin="15" />
 
-            <Frame Margin="25"
-                   BackgroundColor="#57B3D2"
+                <Grid Margin="25"
                    VerticalOptions="FillAndExpand">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".2*" />
-                        <RowDefinition Height=".6*" />
-                        <RowDefinition Height=".2*" />
-                    </Grid.RowDefinitions>
+                    <Grid BackgroundColor="Black"
+                          Opacity=".2"></Grid>
+                    <Grid Padding="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".2*" />
+                            <RowDefinition Height=".6*" />
+                            <RowDefinition Height=".2*" />
+                        </Grid.RowDefinitions>
 
-                    <Label Text="{Binding Data.data[0].city_name}"
+                        <Label Text="{Binding Data.data[0].city_name}"
                            TextColor="White"
                            HorizontalTextAlignment="Center"
                            FontSize="Large"
                            Grid.Row="0"/>
 
-                    <StackLayout Grid.Row="1"
+                        <StackLayout Grid.Row="1"
                                  HorizontalOptions="Center"
                                  VerticalOptions="Center">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://cdn.weatherbit.io/static/img/icons/{0}.png'}"/>
-                            <Label Text="{Binding Data.data[0].weather.description}"
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://cdn.weatherbit.io/static/img/icons/{0}.png'}"/>
+                                <Label Text="{Binding Data.data[0].weather.description}"
                                    FontSize="Large"
                                    TextColor="White"
                                    VerticalOptions="Center"/>
-                        </StackLayout>
+                            </StackLayout>
 
-                        <Label Text="{Binding Data.data[0].temp, StringFormat='{0}°'}"
+                            <Label Text="{Binding Data.data[0].temp, StringFormat='{0}°'}"
                                FontSize="Header"
                                TextColor="White"/>
-                    </StackLayout>
+                        </StackLayout>
 
-                    <StackLayout Grid.Row="2">
-                        <Label Text="{Binding Data.data[0].wind_spd, StringFormat='Wind speed: {0} m/s'}"
+                        <StackLayout Grid.Row="2">
+                            <Label Text="{Binding Data.data[0].wind_spd, StringFormat='Wind speed: {0} m/s'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                        <Label Text="{Binding Data.data[0].rh, StringFormat='Relative humidity: {0}%'}"
+                            <Label Text="{Binding Data.data[0].rh, StringFormat='Relative humidity: {0}%'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                        <Label Text="{Binding Data.data[0].vis, StringFormat='Visibility: {0} KM'}"
+                            <Label Text="{Binding Data.data[0].vis, StringFormat='Visibility: {0} KM'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                        <Label Text="{Binding Data.data[0].uv, StringFormat='UV index: {0}'}"
+                            <Label Text="{Binding Data.data[0].uv, StringFormat='UV index: {0}'}"
                                TextColor="White"
                                FontAttributes="Bold"/>
-                    </StackLayout>
+                        </StackLayout>
+                    </Grid>
                 </Grid>
-            </Frame>
-        </StackLayout>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
