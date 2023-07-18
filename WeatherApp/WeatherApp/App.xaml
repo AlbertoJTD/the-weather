@@ -1,8 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
              x:Class="WeatherApp.App">
     <Application.Resources>
-
+        <ControlTemplate x:Key="GradientPage">
+            <Grid>
+                <magicGradients:GradientView VerticalOptions="FillAndExpand">
+                    <!--<magicGradients:GradientView.GradientSource>
+                    <magicGradients:LinearGradient Angle="180">
+                        <magicGradients:GradientStop Color="#162655" Offset="0" />
+                        <magicGradients:GradientStop Color="#92609E" Offset="1" />
+                    </magicGradients:LinearGradient>
+                </magicGradients:GradientView.GradientSource>-->
+                    <magicGradients:CssGradientSource>
+                        <!-- linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%) -->
+                        <![CDATA[
+                            linear-gradient(to top, #30cfd0 0%, #330867 100%)
+                        ]]>
+                    </magicGradients:CssGradientSource>
+                </magicGradients:GradientView>
+                <ContentPresenter />
+            </Grid>
+        </ControlTemplate>
     </Application.Resources>
 </Application>
